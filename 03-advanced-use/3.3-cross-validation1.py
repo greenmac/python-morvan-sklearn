@@ -67,17 +67,16 @@ for k in k_range:
 """
 以平均方差(Mean squared error) 
 一般来说平均方差(Mean squared error)会用于判断回归(Regression)模型的好坏。
-## scoring='mean_squared_error' 有問題,暫時解不掉
 """
-# import matplotlib.pyplot as plt
-# k_range = range(1, 31)
-# k_scores = []
-# for k in k_range:
-#     knn = KNeighborsClassifier(n_neighbors=k)
-#     loss = -cross_val_score(knn, X, y, cv=10, scoring='mean_squared_error')
-#     k_scores.append(loss.mean())
+import matplotlib.pyplot as plt
+k_range = range(1, 31)
+k_scores = []
+for k in k_range:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    loss = -cross_val_score(knn, X, y, cv=10, scoring='neg_mean_squared_error')
+    k_scores.append(loss.mean())
 
-# plt.plot(k_range, k_scores)
-# plt.xlabel('Value of K for KNN')
-# plt.ylabel('Cross-Validated MSE')
-# plt.show()
+plt.plot(k_range, k_scores)
+plt.xlabel('Value of K for KNN')
+plt.ylabel('Cross-Validated MSE')
+plt.show()
